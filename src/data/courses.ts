@@ -1,0 +1,636 @@
+import {
+  Boxes,
+  Brain,
+  Briefcase,
+  Factory,
+  FileCode,
+  IdCard,
+  PackageSearch,
+  ShoppingCart,
+  Wallet,
+  Building,
+  Building2,
+  BugOff,
+  Calculator,
+  ChartColumn,
+  Cloud,
+  CodeXml,
+  Cog,
+  Compass,
+  Database,
+  Headphones,
+  Landmark,
+  Megaphone,
+  Palette,
+  PenTool,
+  PiggyBank,
+  Ruler,
+  Sofa,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react";
+
+export type Course = {
+  slug: string;
+  name: string;
+  icon: LucideIcon;
+  duration: string;
+  mode: string;
+  level: string;
+  overview: string;
+  modules: string[];
+  tools: string[];
+  careers: string[];
+  eligibility: string;
+};
+
+export type Domain = {
+  slug: string;
+  icon: LucideIcon;
+  title: string;
+  summary: string;
+  courses: Course[];
+};
+
+const BLENDED = "Classroom & Live Online";
+
+export const domains: Domain[] = [
+  {
+    slug: "it-software",
+    icon: CodeXml,
+    title: "IT & Software",
+    summary:
+      "Build in-demand tech skills and launch your career in software development, data and cloud.",
+    courses: [
+      {
+        slug: "full-stack-development",
+        name: "Full Stack Development",
+        icon: CodeXml,
+        duration: "6 Months",
+        mode: BLENDED,
+        level: "Beginner to Advanced",
+        overview:
+          "Learn to design, build and deploy complete web applications — from responsive user interfaces to secure APIs and databases. You will work on real-world projects in a team setup that mirrors how product companies ship software.",
+        modules: [
+          "HTML5, CSS3, Flexbox, Grid & responsive design",
+          "Modern JavaScript (ES6+), async programming & DOM",
+          "React.js — components, hooks, routing & state management",
+          "Node.js & Express — REST APIs, authentication & middleware",
+          "Databases — MongoDB, MySQL & data modelling",
+          "Git, GitHub, deployment & a capstone project",
+        ],
+        tools: ["VS Code", "React", "Node.js", "Express", "MongoDB", "MySQL", "Git"],
+        careers: ["Full Stack Developer", "Front-End Developer", "Back-End / Node.js Developer", "MERN Stack Developer"],
+        eligibility: "Any degree or diploma (B.E., B.Tech, B.Sc., BCA, MCA). No prior coding experience required.",
+      },
+      {
+        slug: "software-testing",
+        name: "Software Testing",
+        icon: BugOff,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Beginner to Intermediate",
+        overview:
+          "Become a quality engineer who can test applications manually and automate repetitive checks. The course covers the complete testing lifecycle used in Agile teams, with hands-on automation using Selenium and Java.",
+        modules: [
+          "SDLC, STLC & Agile / Scrum fundamentals",
+          "Manual testing — test cases, test scenarios & defect life cycle",
+          "Core Java for testers",
+          "Selenium WebDriver, TestNG & Page Object Model",
+          "API testing with Postman & basics of performance testing",
+          "Jira, test reporting & a live project",
+        ],
+        tools: ["Selenium", "Java", "TestNG", "Postman", "Jira", "Maven"],
+        careers: ["Manual Test Engineer", "Automation Test Engineer", "QA Analyst", "API Tester"],
+        eligibility: "Any graduate. Ideal for freshers and non-IT graduates moving into IT.",
+      },
+      {
+        slug: "data-science-machine-learning",
+        name: "Data Science & Machine Learning",
+        icon: Database,
+        duration: "6 Months",
+        mode: BLENDED,
+        level: "Intermediate",
+        overview:
+          "Turn raw data into business decisions. You will learn Python, statistics and machine learning, then apply them to real datasets from retail, finance and healthcare to build predictive models and dashboards.",
+        modules: [
+          "Python programming, NumPy & Pandas",
+          "Statistics, probability & exploratory data analysis",
+          "Data visualisation with Matplotlib, Seaborn & Power BI",
+          "SQL for data analysis",
+          "Machine learning — regression, classification & clustering",
+          "Model evaluation, deployment basics & capstone project",
+        ],
+        tools: ["Python", "Jupyter", "Pandas", "Scikit-learn", "SQL", "Power BI"],
+        careers: ["Data Analyst", "Data Scientist", "ML Engineer (Junior)", "Business Intelligence Analyst"],
+        eligibility: "Graduates in Engineering, Science, Mathematics, Statistics or Commerce.",
+      },
+      {
+        slug: "artificial-intelligence",
+        name: "Artificial Intelligence",
+        icon: Brain,
+        duration: "4 Months",
+        mode: BLENDED,
+        level: "Intermediate to Advanced",
+        overview:
+          "Go beyond the basics of machine learning into deep learning, computer vision, natural language processing and generative AI. Build practical AI applications using today's most widely adopted frameworks.",
+        modules: [
+          "Neural networks & deep learning foundations",
+          "TensorFlow & PyTorch essentials",
+          "Computer vision with CNNs & OpenCV",
+          "Natural language processing & transformers",
+          "Generative AI, prompt engineering & LLM APIs",
+          "Building and deploying an end-to-end AI application",
+        ],
+        tools: ["Python", "TensorFlow", "PyTorch", "OpenCV", "Hugging Face", "LangChain"],
+        careers: ["AI Engineer", "Computer Vision Engineer", "NLP Engineer", "Generative AI Developer"],
+        eligibility: "Basic Python knowledge recommended. Engineering and Science graduates preferred.",
+      },
+      {
+        slug: "cloud-computing",
+        name: "Cloud Computing",
+        icon: Cloud,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Beginner to Intermediate",
+        overview:
+          "Learn how modern companies run their infrastructure on the cloud. Get hands-on with AWS and Azure services, Linux administration and DevOps practices that are in demand across every industry.",
+        modules: [
+          "Cloud fundamentals, networking & Linux basics",
+          "AWS — EC2, S3, IAM, VPC, RDS & Lambda",
+          "Microsoft Azure fundamentals",
+          "Docker & introduction to Kubernetes",
+          "CI/CD pipelines with Jenkins & GitHub Actions",
+          "Monitoring, security best practices & certification prep",
+        ],
+        tools: ["AWS", "Azure", "Linux", "Docker", "Kubernetes", "Jenkins", "Terraform"],
+        careers: ["Cloud Engineer", "DevOps Engineer (Junior)", "Cloud Support Associate", "System Administrator"],
+        eligibility: "Any graduate with basic computer knowledge. IT and ECE backgrounds preferred.",
+      },
+      {
+        slug: "ui-ux-design",
+        name: "UI/UX Design",
+        icon: Palette,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Beginner",
+        overview:
+          "Learn to design digital products people love to use. Master user research, wireframing, visual design and prototyping, and graduate with a professional portfolio you can show to recruiters.",
+        modules: [
+          "Design thinking & user-centred design principles",
+          "User research, personas & user journeys",
+          "Information architecture & wireframing",
+          "Visual design — typography, colour & layout",
+          "Interactive prototyping & usability testing",
+          "Design systems & portfolio building",
+        ],
+        tools: ["Figma", "Adobe XD", "Photoshop", "Illustrator", "Miro"],
+        careers: ["UI Designer", "UX Designer", "Product Designer", "Visual Designer"],
+        eligibility: "Open to all graduates, including arts, design and engineering backgrounds.",
+      },
+    ],
+  },
+  {
+    slug: "sap-erp",
+    icon: Boxes,
+    title: "SAP & ERP",
+    summary:
+      "Become an SAP functional or technical consultant on SAP S/4HANA — one of the most in-demand ERP skills across industries.",
+    courses: [
+      {
+        slug: "sap-fico",
+        name: "SAP FICO",
+        icon: Wallet,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Beginner to Intermediate",
+        overview:
+          "Master SAP Financial Accounting (FI) and Controlling (CO) on SAP S/4HANA. Learn how companies record transactions, manage payables and receivables, track costs and close their books — with hands-on configuration and an end-to-end project.",
+        modules: [
+          "SAP overview, S/4HANA navigation & enterprise structure",
+          "General Ledger accounting & global settings",
+          "Accounts Payable & Accounts Receivable",
+          "Asset Accounting & bank accounting",
+          "Controlling — cost centres, profit centres & internal orders",
+          "FI–MM–SD integration, period-end closing & live project",
+        ],
+        tools: ["SAP S/4HANA", "SAP GUI", "SAP Fiori"],
+        careers: ["SAP FICO Consultant (Junior)", "SAP Finance End User", "Accounts Executive (SAP)", "SAP Support Analyst"],
+        eligibility: "B.Com, M.Com, MBA (Finance), CA / CMA (Inter) or working finance and accounts professionals.",
+      },
+      {
+        slug: "sap-mm",
+        name: "SAP MM",
+        icon: PackageSearch,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Beginner to Intermediate",
+        overview:
+          "Learn SAP Materials Management — the procure-to-pay process used by manufacturers, retailers and distributors. Configure purchasing, inventory and invoice verification in SAP S/4HANA.",
+        modules: [
+          "Organisational structure & master data (material, vendor / business partner)",
+          "Purchasing — purchase requisitions, RFQs, purchase orders & contracts",
+          "Inventory management & goods movements",
+          "Logistics invoice verification",
+          "Material valuation & automatic account determination",
+          "MM–FI–SD–PP integration & procure-to-pay project",
+        ],
+        tools: ["SAP S/4HANA", "SAP GUI", "SAP Fiori"],
+        careers: ["SAP MM Consultant (Junior)", "Procurement Executive (SAP)", "Inventory / Stores Executive", "Supply Chain Analyst"],
+        eligibility: "Graduates in Engineering, Commerce or Supply Chain, and purchase / stores professionals.",
+      },
+      {
+        slug: "sap-sd",
+        name: "SAP SD",
+        icon: ShoppingCart,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Beginner to Intermediate",
+        overview:
+          "Learn SAP Sales & Distribution and the complete order-to-cash cycle — from customer enquiries and sales orders to pricing, delivery and billing in SAP S/4HANA.",
+        modules: [
+          "Enterprise structure & master data (customer, material, pricing)",
+          "Sales order processing & sales document types",
+          "Pricing procedure & condition technique",
+          "Shipping, delivery & billing",
+          "Credit management & output determination",
+          "SD–FI–MM integration & order-to-cash project",
+        ],
+        tools: ["SAP S/4HANA", "SAP GUI", "SAP Fiori"],
+        careers: ["SAP SD Consultant (Junior)", "Sales Operations Executive (SAP)", "Order Management Analyst", "SAP Support Consultant"],
+        eligibility: "Graduates in Commerce, Management or Engineering, and sales / logistics professionals.",
+      },
+      {
+        slug: "sap-pp",
+        name: "SAP PP",
+        icon: Factory,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Intermediate",
+        overview:
+          "Learn SAP Production Planning — how manufacturers plan materials, capacity and production. Highly relevant for Coimbatore's pump, motor, foundry and auto-component industries.",
+        modules: [
+          "Master data — bill of materials, work centres & routings",
+          "Demand management and sales & operations planning",
+          "Material requirements planning (MRP)",
+          "Production orders & shop-floor control",
+          "Capacity planning & production confirmations",
+          "PP–MM–QM integration & manufacturing project",
+        ],
+        tools: ["SAP S/4HANA", "SAP GUI", "SAP Fiori"],
+        careers: ["SAP PP Consultant (Junior)", "Production Planning Executive", "PPC Engineer (SAP)", "Manufacturing Systems Analyst"],
+        eligibility: "Diploma or B.E. in Mechanical, Production or Industrial Engineering, and PPC professionals.",
+      },
+      {
+        slug: "sap-hcm-successfactors",
+        name: "SAP HCM & SuccessFactors",
+        icon: IdCard,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Beginner to Intermediate",
+        overview:
+          "Learn how organisations manage their people in SAP — from employee records, time and payroll in SAP HCM to cloud-based recruiting, onboarding and performance management in SAP SuccessFactors.",
+        modules: [
+          "Organisational management & personnel administration",
+          "Time management",
+          "Payroll fundamentals (India)",
+          "SuccessFactors Employee Central",
+          "SuccessFactors Recruiting, Onboarding & Performance Management",
+          "HR reporting & end-to-end project",
+        ],
+        tools: ["SAP HCM", "SAP SuccessFactors", "SAP GUI"],
+        careers: ["SAP HCM Consultant (Junior)", "SuccessFactors Consultant", "HRIS Executive", "Payroll Executive (SAP)"],
+        eligibility: "MBA (HR), MSW, BBA or any graduate, and working HR / payroll professionals.",
+      },
+      {
+        slug: "sap-abap",
+        name: "SAP ABAP",
+        icon: FileCode,
+        duration: "4 Months",
+        mode: BLENDED,
+        level: "Intermediate",
+        overview:
+          "Become an SAP technical consultant. Learn ABAP programming to build reports, forms, interfaces and enhancements — including modern ABAP on HANA development with CDS views.",
+        modules: [
+          "ABAP fundamentals & ABAP Data Dictionary",
+          "Internal tables, modularisation & debugging",
+          "Reports — classical, interactive & ALV",
+          "Dialog programming, BDC & data migration",
+          "Enhancements, BAPIs, SmartForms & Adobe Forms",
+          "ABAP on HANA, CDS views & OData basics",
+        ],
+        tools: ["SAP GUI", "ABAP Workbench", "Eclipse ADT", "SAP HANA"],
+        careers: ["SAP ABAP Developer", "SAP Technical Consultant", "ABAP on HANA Developer"],
+        eligibility: "B.E. / B.Tech, BCA, MCA or B.Sc. Computer Science. Basic programming knowledge is helpful.",
+      },
+    ],
+  },
+  {
+    slug: "cad-engineering",
+    icon: Ruler,
+    title: "CAD & Engineering",
+    summary:
+      "Master industry-standard design tools for mechanical, civil, architecture and interior careers.",
+    courses: [
+      {
+        slug: "autocad",
+        name: "AutoCAD (2D & 3D)",
+        icon: PenTool,
+        duration: "2 Months",
+        mode: "Classroom",
+        level: "Beginner",
+        overview:
+          "The foundation for every design and drafting career. Learn to create accurate 2D drawings and 3D models to industry standards for mechanical, civil and architectural projects.",
+        modules: [
+          "AutoCAD interface, drawing & modify commands",
+          "Layers, blocks, dimensions & annotations",
+          "Orthographic & isometric drawings",
+          "Plotting, layouts & drawing standards",
+          "3D modelling — solids, surfaces & rendering",
+          "Industry drawing project",
+        ],
+        tools: ["AutoCAD 2D", "AutoCAD 3D"],
+        careers: ["CAD Draftsman", "Design Engineer (Trainee)", "Drafting Technician"],
+        eligibility: "Diploma or degree in Mechanical, Civil, EEE, Architecture or related fields.",
+      },
+      {
+        slug: "solidworks",
+        name: "SolidWorks",
+        icon: Cog,
+        duration: "2 Months",
+        mode: "Classroom",
+        level: "Beginner to Intermediate",
+        overview:
+          "Design mechanical parts and assemblies the way product engineers do. Ideal for careers in Coimbatore's pump, motor, auto-component and machinery manufacturing sector.",
+        modules: [
+          "Sketching & part modelling",
+          "Feature-based design & design intent",
+          "Assembly modelling & mates",
+          "Sheet metal & weldments",
+          "Detailed engineering drawings & GD&T basics",
+          "Introduction to simulation & a product design project",
+        ],
+        tools: ["SolidWorks", "SolidWorks Simulation"],
+        careers: ["Mechanical Design Engineer", "Product Design Engineer", "CAD Engineer"],
+        eligibility: "Diploma or B.E. in Mechanical, Automobile, Mechatronics or Production Engineering.",
+      },
+      {
+        slug: "creo",
+        name: "Creo",
+        icon: Compass,
+        duration: "2 Months",
+        mode: "Classroom",
+        level: "Beginner to Intermediate",
+        overview:
+          "Learn PTC Creo, widely used in automotive and heavy-engineering companies, for parametric modelling, surfacing and assembly design.",
+        modules: [
+          "Creo interface & parametric sketching",
+          "Part modelling & advanced features",
+          "Surface modelling",
+          "Assembly design & exploded views",
+          "Drafting & detailing",
+          "Product design project",
+        ],
+        tools: ["PTC Creo Parametric"],
+        careers: ["Design Engineer", "Product Development Engineer", "CAD Modeller"],
+        eligibility: "Diploma or B.E. in Mechanical, Automobile or related engineering streams.",
+      },
+      {
+        slug: "civil-engineering",
+        name: "Civil Engineering",
+        icon: Building,
+        duration: "3 Months",
+        mode: "Classroom",
+        level: "Beginner to Intermediate",
+        overview:
+          "A software-focused program for civil engineers covering building design, structural analysis, estimation and project planning — the skills site and design offices look for.",
+        modules: [
+          "AutoCAD for civil drawings & building plans",
+          "Revit Architecture & Structure basics",
+          "STAAD.Pro for structural analysis",
+          "Quantity estimation & costing",
+          "Project planning with MS Project / Primavera",
+          "Residential building design project",
+        ],
+        tools: ["AutoCAD", "Revit", "STAAD.Pro", "MS Project", "Primavera"],
+        careers: ["Site Engineer", "Structural Design Engineer", "Quantity Surveyor", "Planning Engineer"],
+        eligibility: "Diploma or B.E. / B.Tech in Civil Engineering.",
+      },
+      {
+        slug: "architecture",
+        name: "Architecture",
+        icon: Building2,
+        duration: "3 Months",
+        mode: "Classroom",
+        level: "Intermediate",
+        overview:
+          "Bring architectural concepts to life with BIM modelling, 3D visualisation and photorealistic rendering used by leading architecture firms.",
+        modules: [
+          "Architectural drafting in AutoCAD",
+          "BIM modelling with Revit Architecture",
+          "3D modelling with SketchUp",
+          "Rendering with Lumion & V-Ray",
+          "Presentation boards & walkthroughs",
+          "Portfolio project",
+        ],
+        tools: ["AutoCAD", "Revit", "SketchUp", "Lumion", "V-Ray"],
+        careers: ["Architectural Draftsman", "BIM Modeller", "3D Visualiser", "Junior Architect"],
+        eligibility: "B.Arch, Diploma in Architecture or Civil Engineering students and graduates.",
+      },
+      {
+        slug: "interior-design",
+        name: "Interior Design",
+        icon: Sofa,
+        duration: "3 Months",
+        mode: "Classroom",
+        level: "Beginner",
+        overview:
+          "Learn to plan and visualise beautiful, functional residential and commercial interiors — from space planning to material selection and realistic 3D renders.",
+        modules: [
+          "Principles of interior design & space planning",
+          "Furniture, materials, lighting & colour",
+          "2D interior layouts in AutoCAD",
+          "3D modelling in SketchUp & 3ds Max",
+          "Rendering with V-Ray",
+          "Client presentation & portfolio",
+        ],
+        tools: ["AutoCAD", "SketchUp", "3ds Max", "V-Ray"],
+        careers: ["Interior Designer", "Interior Draftsman", "3D Visualiser", "Design Consultant"],
+        eligibility: "Open to all graduates and diploma holders with an interest in design.",
+      },
+    ],
+  },
+  {
+    slug: "banking-finance",
+    icon: Landmark,
+    title: "Banking & Finance",
+    summary:
+      "Get ready for roles in banking, investments and analytics — or crack competitive bank exams.",
+    courses: [
+      {
+        slug: "banking-financial-services",
+        name: "Banking & Financial Services",
+        icon: Landmark,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Beginner",
+        overview:
+          "A job-ready program for graduates who want to start a career in private banks, NBFCs and financial services companies. Covers banking operations, products, compliance and customer service.",
+        modules: [
+          "Indian banking system & RBI regulations",
+          "Retail banking products — deposits, loans & cards",
+          "Branch operations, KYC & AML compliance",
+          "Credit appraisal & loan processing basics",
+          "Insurance & mutual fund fundamentals",
+          "Customer handling, sales skills & interview preparation",
+        ],
+        tools: ["MS Excel", "Core Banking Concepts", "CRM basics"],
+        careers: ["Relationship Executive", "Banking Operations Executive", "Loan Officer", "Customer Service Officer"],
+        eligibility: "Any graduate (B.Com, BBA, B.Sc., B.A., B.E.). Freshers welcome.",
+      },
+      {
+        slug: "investment-management",
+        name: "Investment Management",
+        icon: PiggyBank,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Intermediate",
+        overview:
+          "Understand how money is invested and managed. Learn equity research, portfolio construction and financial modelling used by broking firms, AMCs and wealth management teams.",
+        modules: [
+          "Financial markets & instruments",
+          "Equity research & fundamental analysis",
+          "Technical analysis basics",
+          "Portfolio management & asset allocation",
+          "Financial modelling in Excel",
+          "NISM certification guidance",
+        ],
+        tools: ["Advanced Excel", "Financial Modelling", "Trading Platforms"],
+        careers: ["Equity Research Analyst", "Wealth Management Associate", "Portfolio Analyst", "Investment Advisor"],
+        eligibility: "B.Com, BBA, MBA (Finance) or any graduate with an interest in finance.",
+      },
+      {
+        slug: "business-analytics",
+        name: "Business Analytics",
+        icon: ChartColumn,
+        duration: "4 Months",
+        mode: BLENDED,
+        level: "Beginner to Intermediate",
+        overview:
+          "Learn to analyse business data and present insights that drive decisions. Covers Excel, SQL and Power BI with case studies from sales, finance and operations.",
+        modules: [
+          "Advanced Excel — formulas, pivots & dashboards",
+          "Business statistics",
+          "SQL for business analysis",
+          "Power BI & Tableau dashboards",
+          "Business case studies & storytelling with data",
+          "Capstone analytics project",
+        ],
+        tools: ["Excel", "SQL", "Power BI", "Tableau"],
+        careers: ["Business Analyst", "MIS Executive", "Data Analyst", "Reporting Analyst"],
+        eligibility: "Any graduate. Commerce, management and engineering backgrounds preferred.",
+      },
+      {
+        slug: "bank-exam-coaching",
+        name: "Bank Exam Coaching (IBPS / SBI / RRB)",
+        icon: Calculator,
+        duration: "6 Months",
+        mode: BLENDED,
+        level: "All Levels",
+        overview:
+          "Structured coaching for IBPS PO & Clerk, SBI PO & Clerk and RRB exams, with concept classes, shortcut techniques, regular mock tests and interview guidance.",
+        modules: [
+          "Quantitative aptitude",
+          "Reasoning ability",
+          "English language",
+          "General & banking awareness, current affairs",
+          "Computer awareness",
+          "Weekly mock tests, analysis & interview preparation",
+        ],
+        tools: ["Online Mock Test Series", "Study Material", "Doubt-clearing Sessions"],
+        careers: ["Probationary Officer (PO)", "Bank Clerk", "RRB Officer Scale I", "RRB Office Assistant"],
+        eligibility: "Any graduate, aged 20–30 years (age relaxation as per government norms).",
+      },
+    ],
+  },
+  {
+    slug: "non-it-operations",
+    icon: Briefcase,
+    title: "Non-IT & Operations",
+    summary:
+      "Practical, high-growth career paths in marketing, customer support and business development.",
+    courses: [
+      {
+        slug: "digital-marketing",
+        name: "Digital Marketing",
+        icon: Megaphone,
+        duration: "3 Months",
+        mode: BLENDED,
+        level: "Beginner",
+        overview:
+          "Learn to grow businesses online. Plan and run real campaigns across search, social media and email, and measure results using analytics — skills every company now needs.",
+        modules: [
+          "Digital marketing fundamentals & strategy",
+          "Search engine optimisation (SEO)",
+          "Google Ads & performance marketing",
+          "Social media marketing — Meta, Instagram & LinkedIn",
+          "Content, email marketing & automation",
+          "Google Analytics, reporting & live campaign project",
+        ],
+        tools: ["Google Ads", "Meta Ads Manager", "Google Analytics", "SEMrush", "Canva", "WordPress"],
+        careers: ["Digital Marketing Executive", "SEO Specialist", "Social Media Manager", "Performance Marketer"],
+        eligibility: "Any graduate or final-year student. No technical background needed.",
+      },
+      {
+        slug: "bpo-customer-support",
+        name: "BPO / Customer Support",
+        icon: Headphones,
+        duration: "1 Month",
+        mode: "Classroom",
+        level: "Beginner",
+        overview:
+          "A fast-track program that prepares you for voice and non-voice roles in BPOs and customer support teams, with a strong focus on communication and interview readiness.",
+        modules: [
+          "Spoken English & communication skills",
+          "Voice & accent training",
+          "Customer service etiquette & handling difficult calls",
+          "Email & chat support",
+          "Typing, CRM tools & basic computer skills",
+          "Mock calls & interview preparation",
+        ],
+        tools: ["CRM Software", "Ticketing Tools", "MS Office"],
+        careers: ["Customer Support Executive", "Voice Process Associate", "Chat / Email Support Executive", "Technical Support Associate"],
+        eligibility: "12th pass, diploma or any graduate.",
+      },
+      {
+        slug: "sales-business-development",
+        name: "Sales & Business Development",
+        icon: TrendingUp,
+        duration: "6 Weeks",
+        mode: "Classroom",
+        level: "Beginner",
+        overview:
+          "Build the skills to find customers, close deals and grow revenue. Learn modern B2B and B2C selling techniques, negotiation and CRM-driven pipeline management.",
+        modules: [
+          "Sales fundamentals & the sales cycle",
+          "Prospecting, lead generation & cold calling",
+          "Presentation & negotiation skills",
+          "B2B vs B2C selling",
+          "CRM & pipeline management",
+          "Role plays & interview preparation",
+        ],
+        tools: ["CRM (Zoho / HubSpot)", "LinkedIn Sales Navigator", "MS Excel"],
+        careers: ["Business Development Executive", "Sales Executive", "Inside Sales Representative", "Key Account Executive"],
+        eligibility: "Any graduate with good communication skills.",
+      },
+    ],
+  },
+];
+
+export const allCourses = domains.flatMap((d) =>
+  d.courses.map((c) => ({ ...c, domain: { slug: d.slug, title: d.title } })),
+);
+
+export function getCourse(slug: string) {
+  return allCourses.find((c) => c.slug === slug);
+}
