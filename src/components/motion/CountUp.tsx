@@ -1,14 +1,15 @@
 "use client";
 
-import { animate, useInView } from "motion/react";
+import { animate, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef } from "react";
 
 export default function CountUp({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
+  const reduceMotion = useReducedMotion();
   useEffect(() => {
-    const match = value.match(/^(\d+)(.*)$/);
-    if (!inView || !match || !ref.current) return;
+    const match = value.match(/^(\d+)(?![\d.,])(.*)$/);
+    if (!inView || reduceMotion || !match || !ref.current) return;
     const el = ref.current;
     const target = Number(match[1]);
     const suffix = match[2];
@@ -20,7 +21,7 @@ export default function CountUp({ value }: { value: string }) {
       },
     });
     return () => controls.stop();
-  }, [inView, value]);
+  }, [inView, reduceMotion, value]);
 
   return <span ref={ref}>{value}</span>;
 }

@@ -1,133 +1,172 @@
 "use client";
 
-import { useState } from "react";
-import { Mail, MessageCircle } from "lucide-react";
-import { domains } from "@/data/courses";
-import { site } from "@/lib/site";
+import { useActionState, useEffect, useState } from "react";
+import { CircleCheck, LoaderCircle, MessageCircle, Send } from "lucide-react";
+import { sendEnquiry, type EnquiryState } from "@/app/actions/enquiry";
+import { industries } from "@/data/industries";
+import { markEnquirySent } from "@/lib/enquiry-popup";
+import { enquiryTypes, resumeEnquiryTypes, site } from "@/lib/site";
+import { Field, Honeypot, ResumeField, inputCls } from "./FormFields";
 
-const enquiryTypes = [
-  "I'm looking for a job",
-  "I want to join a course",
-  "I want to hire talent",
-  "HR outsourcing / onboarding",
-  "Other",
-];
+const initialState: EnquiryState = { status: "idle" };
 
 export default function ContactForm() {
-  const [error, setError] = useState("");
+  const [state, formAction, pending] = useActionState(sendEnquiry, initialState);
+  const [type, setType] = useState<string>(enquiryTypes[0]);
+  const [whatsappError, setWhatsappError] = useState("");
+  const [dismissedSuccess, setDismissedSuccess] = useState<EnquiryState | null>(null);
 
-  function buildMessage(form: HTMLFormElement) {
+  const errors = state.fieldErrors ?? {};
+  const values = state.status === "error" ? state.values : undefined;
+  const showResume = resumeEnquiryTypes.includes(type);
+
+  useEffect(() => {
+    if (state.status === "success") markEnquirySent();
+  }, [state]);
+
+  function sendWhatsApp(e: React.MouseEvent<HTMLButtonElement>) {
+    const form = e.currentTarget.form;
+    if (!form) return;
     const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
     const phone = String(data.get("phone") ?? "").trim();
     if (!name || !phone) {
-      setError("Please enter your name and phone number.");
-      return null;
+      setWhatsappError("Please enter your name and phone number.");
+      return;
     }
-    setError("");
+    setWhatsappError("");
     const lines = [
       `Name: ${name}`,
       `Phone: ${phone}`,
       `Email: ${data.get("email") || "-"}`,
       `Enquiry: ${data.get("type")}`,
       `Preferred branch: ${data.get("branch")}`,
-      `Interested domain: ${data.get("domain") || "-"}`,
+      `Industry / sector: ${data.get("sector") || "-"}`,
       "",
       String(data.get("message") || ""),
     ];
-    return { subject: `Website enquiry from ${name}`, body: lines.join("\n") };
+    window.open(`${site.whatsappHref}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank");
   }
 
-  function sendWhatsApp(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const msg = buildMessage(e.currentTarget);
-    if (!msg) return;
-    window.open(`${site.whatsappHref}?text=${encodeURIComponent(msg.body)}`, "_blank");
-  }
-
-  function sendEmail(e: React.MouseEvent<HTMLButtonElement>) {
-    const form = e.currentTarget.form;
-    if (!form) return;
-    const msg = buildMessage(form);
-    if (!msg) return;
-    window.open(
-      `${site.emailHref}?subject=${encodeURIComponent(msg.subject)}&body=${encodeURIComponent(msg.body)}`,
-      "_self",
+  if (state.status === "success" && dismissedSuccess !== state) {
+    return (
+      <div className="flex flex-col items-center py-10 text-center" role="status">
+        <div className="flex size-16 items-center justify-center rounded-full bg-brand-50 text-brand-700">
+          <CircleCheck className="size-8" />
+        </div>
+        <h3 className="mt-6 text-2xl font-bold">Thanks, {state.values?.name || "there"}!</h3>
+        <p className="mt-3 max-w-sm text-slate-600">
+          Our team has received your enquiry and will call you within one business day.
+        </p>
+        <button
+          type="button"
+          onClick={() => setDismissedSuccess(state)}
+          className="btn-outline mt-8"
+        >
+          Send another
+        </button>
+      </div>
     );
   }
 
-  const inputCls =
-    "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100";
-
   return (
-    <form onSubmit={sendWhatsApp} className="grid gap-5 sm:grid-cols-2">
-      <Field label="Full Name *">
-        <input name="name" required placeholder="Your name" className={inputCls} />
+    <form action={formAction} className="grid gap-5 sm:grid-cols-2">
+      <Field label="Full Name *" error={errors.name}>
+        <input
+          name="name"
+          required
+          maxLength={80}
+          placeholder="Your name"
+          defaultValue={values?.name}
+          className={inputCls}
+        />
       </Field>
-      <Field label="Phone Number *">
-        <input name="phone" type="tel" required placeholder="+91" className={inputCls} />
+      <Field label="Phone Number *" error={errors.phone}>
+        <input
+          name="phone"
+          type="tel"
+          required
+          placeholder="+91"
+          defaultValue={values?.phone}
+          className={inputCls}
+        />
       </Field>
-      <Field label="Email">
-        <input name="email" type="email" placeholder="you@example.com" className={inputCls} />
+      <Field label="Email" error={errors.email}>
+        <input
+          name="email"
+          type="email"
+          placeholder="you@example.com"
+          defaultValue={values?.email}
+          className={inputCls}
+        />
       </Field>
-      <Field label="I am enquiring about">
-        <select name="type" className={inputCls} defaultValue={enquiryTypes[0]}>
+      <Field label="I am enquiring about" error={errors.type}>
+        <select
+          name="type"
+          className={inputCls}
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        >
           {enquiryTypes.map((t) => (
             <option key={t}>{t}</option>
           ))}
         </select>
       </Field>
-      <Field label="Preferred Branch">
-        <select name="branch" className={inputCls} defaultValue={site.branches[0].city}>
+      <Field label="Preferred Branch" error={errors.branch}>
+        <select
+          name="branch"
+          className={inputCls}
+          defaultValue={values?.branch ?? site.branches[0].city}
+        >
           {site.branches.map((b) => (
             <option key={b.city}>{b.city}</option>
           ))}
         </select>
       </Field>
-      <Field label="Interested Domain">
-        <select name="domain" className={inputCls} defaultValue="">
-          <option value="">Select a domain (optional)</option>
-          {domains.map((d) => (
-            <option key={d.slug}>{d.title}</option>
+      <Field label="Industry / Sector" error={errors.sector}>
+        <select name="sector" className={inputCls} defaultValue={values?.sector ?? ""}>
+          <option value="">Select a sector (optional)</option>
+          {industries.map((i) => (
+            <option key={i.slug}>{i.name}</option>
           ))}
         </select>
       </Field>
-      <Field label="Message" full>
+      {showResume && <ResumeField error={errors.resume} />}
+      <Field label="Message" error={errors.message} full>
         <textarea
           name="message"
           rows={5}
+          maxLength={2000}
           placeholder="Tell us a little about what you need..."
+          defaultValue={values?.message}
           className={inputCls}
         />
       </Field>
 
-      {error && <p className="text-sm text-red-600 sm:col-span-2">{error}</p>}
+      <Honeypot />
+
+      {(whatsappError || (state.status === "error" && state.message)) && (
+        <p className="text-sm text-red-600 sm:col-span-2" role="alert">
+          {whatsappError || state.message}
+        </p>
+      )}
 
       <div className="flex flex-wrap gap-3 sm:col-span-2">
-        <button type="submit" className="btn-primary">
-          <MessageCircle className="size-4" /> Send via WhatsApp
+        <button type="submit" disabled={pending} className="btn-primary disabled:opacity-70">
+          {pending ? (
+            <>
+              <LoaderCircle className="size-4 animate-spin" /> Sending...
+            </>
+          ) : (
+            <>
+              <Send className="size-4" /> Send Enquiry
+            </>
+          )}
         </button>
-        <button type="button" onClick={sendEmail} className="btn-outline">
-          <Mail className="size-4" /> Send via Email
+        <button type="button" onClick={sendWhatsApp} className="btn-outline">
+          <MessageCircle className="size-4" /> Send via WhatsApp
         </button>
       </div>
     </form>
-  );
-}
-
-function Field({
-  label,
-  full,
-  children,
-}: {
-  label: string;
-  full?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <label className={`block ${full ? "sm:col-span-2" : ""}`}>
-      <span className="mb-2 block text-sm font-medium text-brand-900">{label}</span>
-      {children}
-    </label>
   );
 }

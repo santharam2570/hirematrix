@@ -32,9 +32,10 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="hidden bg-brand-900 text-xs text-brand-100 md:block">
+      <div className="hidden bg-brand-950 text-xs text-brand-100 md:block">
         <div className="container-x flex h-9 items-center justify-between">
-          <p>
+          <p className="flex items-center gap-2">
+            <span className="size-1.5 rounded-full bg-accent-400" />
             {site.tagline} — {site.locations}
           </p>
           <div className="flex items-center gap-6">
@@ -61,10 +62,10 @@ export default function Header() {
               <div key={link.href} className="group relative">
                 <Link
                   href={link.href}
-                  className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                  className={`relative flex items-center gap-1 px-3 py-2 text-sm font-semibold transition-colors after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:origin-left after:rounded-full after:bg-accent-400 after:transition-transform ${
                     isActive(link.href)
-                      ? "bg-brand-50 text-brand-800"
-                      : "text-slate-600 hover:text-brand-800"
+                      ? "text-brand-900 after:scale-x-100"
+                      : "text-slate-600 after:scale-x-0 hover:text-brand-900 hover:after:scale-x-100"
                   }`}
                 >
                   {link.label}
@@ -97,9 +98,12 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="hidden xl:block">
-            <Link href="/contact" className="btn-primary">
-              Get in Touch
+          <div className="hidden items-center gap-2 xl:flex">
+            <Link href="/jobs" className="btn-outline px-5">
+              Find a Job
+            </Link>
+            <Link href="/employers" className="btn-primary px-5">
+              Hire Talent
             </Link>
           </div>
 
@@ -168,9 +172,14 @@ export default function Header() {
                   )}
                 </div>
               ))}
-              <Link href="/contact" onClick={close} className="btn-primary mt-2">
-                Get in Touch
-              </Link>
+              <div className="mt-2 grid grid-cols-2 gap-3">
+                <Link href="/jobs" onClick={close} className="btn-outline">
+                  Find a Job
+                </Link>
+                <Link href="/employers" onClick={close} className="btn-primary">
+                  Hire Talent
+                </Link>
+              </div>
             </div>
           </motion.nav>
         )}

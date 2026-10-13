@@ -17,14 +17,14 @@ export default function PrivacyPolicyPage() {
         {
           heading: "Information We Collect",
           body: [
-            "When you contact us, register as a candidate, enrol in a course or share a hiring requirement, we may collect your name, phone number, email address, educational and employment details, resume, and any other information you choose to provide.",
+            "When you contact us, register as a candidate or share a hiring requirement, we may collect your name, phone number, email address, educational and employment details, resume, and any other information you choose to provide.",
             "For employers, we may collect company name, contact person details and information about open positions.",
           ],
         },
         {
           heading: "How We Use Your Information",
           body: [
-            "We use candidate information to assess suitability for job openings and training programmes, share relevant profiles with prospective employers, and communicate about opportunities, interviews and courses.",
+            "We use candidate information to assess suitability for job openings, share relevant profiles with prospective employers, and communicate about opportunities, interviews and recruitment updates.",
             "We use employer information to understand hiring requirements, deliver recruitment services and maintain our business relationship.",
           ],
         },
@@ -44,7 +44,7 @@ export default function PrivacyPolicyPage() {
         {
           heading: "Your Choices",
           body: [
-            `You may request access to, correction of, or deletion of your personal information at any time by contacting us at ${site.email}. You can also ask us to stop sending you communications about opportunities or courses.`,
+            `You may request access to, correction of, or deletion of your personal information at any time by contacting us at ${site.email}. You can also ask us to stop sending you communications about job opportunities.`,
           ],
         },
         {

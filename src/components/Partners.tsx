@@ -76,8 +76,8 @@ export default function Partners() {
       <div className="container-x">
         <SectionHeading
           eyebrow="Partners"
-          title="See Where Our Alumni Work Now"
-          description="Our tie-ups with high-growth companies enable our learners to step directly into rewarding job roles."
+          title="Where our candidates *work*"
+          description="Our connections with growing companies help job seekers step into genuine, rewarding roles."
         />
       </div>
 
@@ -87,7 +87,7 @@ export default function Partners() {
       </Reveal>
 
       <Reveal delay={0.25} className="container-x mt-12 flex flex-wrap justify-center gap-4">
-        <Link href="/courses" className="btn-primary group">
+        <Link href="/job-seekers" className="btn-primary group">
           Start Your Career Journey
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
         </Link>

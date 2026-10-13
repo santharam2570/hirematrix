@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Instrument_Serif, Inter, Plus_Jakarta_Sans } from "next/font/google";
+import EnquiryModal from "@/components/EnquiryModal";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -12,16 +13,23 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
+});
+
+const instrument = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Recruitment & Career Training in Coimbatore & Trichy`,
+    default: `${site.name} | Placement & Recruitment in Coimbatore & Trichy`,
     template: `%s | ${site.shortName}`,
   },
   description: site.description,
@@ -31,7 +39,8 @@ export const metadata: Metadata = {
     "HR consultancy Trichy",
     "placement consultancy Tiruchirappalli",
     "placement consultancy",
-    "job oriented courses",
+    "jobs in Coimbatore",
+    "IT and Non-IT recruitment",
     "talent acquisition",
     "HireMatrix",
   ],
@@ -48,13 +57,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${jakarta.variable} ${instrument.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col" suppressHydrationWarning>
         <MotionProvider>
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
           <WhatsAppButton />
+          <EnquiryModal />
         </MotionProvider>
       </body>
     </html>

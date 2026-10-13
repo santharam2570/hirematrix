@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Building2, GraduationCap, type LucideIcon } from "lucide-react";
+import { ArrowRight, Building2, UserRound, type LucideIcon } from "lucide-react";
+import Accent from "@/components/Accent";
 import CtaBand from "@/components/CtaBand";
 import IconCard from "@/components/IconCard";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
-import { careerServices, hiringModels, recruitmentServices, type Item } from "@/lib/site";
+import { candidateServices, hiringModels, recruitmentServices, type Item } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Recruitment & staffing, talent acquisition, corporate onboarding, HR outsourcing, career training and placement support from HireMatrix, Coimbatore.",
+    "Permanent placement, IT, Non-IT, engineering and BPO recruitment, bulk hiring coordination and job placement support from HireMatrix, Coimbatore and Tiruchirappalli.",
 };
 
 export default function ServicesPage() {
@@ -18,26 +19,26 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="End-to-end HR & career solutions"
-        description="We help businesses hire the right people and help people become job-ready — all under one roof."
+        title="Recruitment that works for *both sides.*"
+        description="We help companies find suitable candidates and help job seekers connect with genuine job opportunities — through an organised, transparent recruitment process."
       />
 
       <ServiceGroup
-        id="recruitment"
+        id="employers"
         icon={Building2}
-        label="For Employers"
-        title="Recruitment & Staffing Services"
-        description="We act as a bridge between job seekers and employers, providing end-to-end HR solutions so you can focus on growing your business."
+        label="For Companies"
+        title="Recruitment *Solutions*"
+        description="Each assignment starts with understanding your requirement — responsibilities, qualifications, experience, location, compensation range and joining timeline. We then coordinate sourcing, profile review, referrals, interviews and follow-up."
         items={recruitmentServices}
         cta={{ href: "/employers", label: "Hiring Solutions for Employers" }}
       />
 
-      <section className="bg-slate-50 py-24">
+      <section className="bg-paper py-24">
         <div className="container-x">
           <SectionHeading
             eyebrow="Hiring Models"
-            title="Flexible engagement options"
-            description="Pick the model that suits your timeline, budget and workforce plans."
+            title="Flexible recruitment *arrangements*"
+            description="Services are agreed according to your hiring volume, role requirements, timelines and commercial terms."
           />
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {hiringModels.map((m, i) => (
@@ -48,13 +49,13 @@ export default function ServicesPage() {
       </section>
 
       <ServiceGroup
-        id="training"
-        icon={GraduationCap}
+        id="job-seekers"
+        icon={UserRound}
         label="For Job Seekers"
-        title="Career Training & Skill Development"
-        description="Job-oriented courses designed to help freshers and professionals become job-ready — with interview coaching, resume building and direct connections to hiring partners."
-        items={careerServices}
-        cta={{ href: "/courses", label: "Browse Courses" }}
+        title="Candidate *Placement* Services"
+        description="We connect freshers and experienced professionals with genuine openings that reflect their qualifications, experience and career goals — and keep them informed at every step."
+        items={candidateServices}
+        cta={{ href: "/job-seekers", label: "Find a Job" }}
       />
 
       <CtaBand />
@@ -86,8 +87,10 @@ function ServiceGroup({
           <span className="eyebrow">
             <Icon className="size-3.5" /> {label}
           </span>
-          <h2 className="mt-4 text-3xl font-bold md:text-4xl">{title}</h2>
-          <p className="mt-4 text-lg text-slate-600">{description}</p>
+          <h2 className="mt-5 text-3xl font-extrabold md:text-[2.75rem] md:leading-[1.1]">
+            <Accent text={title} />
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-slate-600">{description}</p>
           <Link href={cta.href} className="btn-primary mt-8">
             {cta.label} <ArrowRight className="size-4" />
           </Link>

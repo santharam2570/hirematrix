@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
-import { domains } from "@/data/courses";
 import { industries } from "@/data/industries";
 import { site } from "@/lib/site";
 
@@ -9,6 +8,7 @@ const companyLinks = [
   { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
   { href: "/employers", label: "For Employers" },
+  { href: "/jobs", label: "Job Opportunities" },
   { href: "/job-seekers", label: "For Job Seekers" },
   { href: "/faq", label: "FAQs" },
   { href: "/contact", label: "Contact" },
@@ -16,8 +16,8 @@ const companyLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-950 text-brand-100">
-      <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1.2fr_1fr_1.3fr]">
+    <footer className="border-t-4 border-accent-400 bg-brand-950 text-brand-100">
+      <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1.3fr]">
         <div>
           <Link
             href="/"
@@ -26,9 +26,13 @@ export default function Footer() {
           >
             <Image src="/logo.png" alt="HireMatrix" width={420} height={250} className="h-12 w-auto" />
           </Link>
-          <p className="mt-5 text-sm leading-relaxed text-brand-200">
-            Recruitment, talent acquisition and skill training firm with branches in Coimbatore and
-            Tiruchirappalli — bridging job seekers and employers.
+          <p className="mt-6 font-serif text-xl leading-snug text-accent-200 italic">
+            Connecting talent. Strengthening workforces. Creating opportunities.
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-brand-200">
+            Placement and recruitment company with branches in Coimbatore and Tiruchirappalli —
+            connecting job seekers with genuine opportunities and companies with suitable
+            candidates.
           </p>
         </div>
 
@@ -37,11 +41,6 @@ export default function Footer() {
           title="Industries"
           links={industries.map((i) => ({ href: `/industries/${i.slug}`, label: i.name }))}
         />
-        <FooterColumn
-          title="Courses"
-          links={domains.map((d) => ({ href: `/courses#${d.slug}`, label: d.title }))}
-        />
-
         <div>
           <h4 className="text-sm font-semibold tracking-widest text-white uppercase">Contact</h4>
           <ul className="mt-5 space-y-4 text-sm">

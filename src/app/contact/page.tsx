@@ -5,7 +5,7 @@ import ContactForm from "@/components/ContactForm";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
-import { site } from "@/lib/site";
+import { inlineEnquiryId, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -24,8 +24,8 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Let's talk about your next step"
-        description={`Looking for a job, a course, or the right people for your team? Call us, message us, or walk into our ${site.locations} branches.`}
+        title="Let's talk about your *next step.*"
+        description={`Looking for a genuine job opportunity, or the right candidates for your team? Call us, message us, or walk into our ${site.locations} branches.`}
       />
 
       <section className="container-x relative z-10 -mt-10 grid gap-5 md:grid-cols-3">
@@ -37,7 +37,7 @@ export default function ContactPage() {
               rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
               className="card group flex items-center gap-4 p-6"
             >
-              <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-brand-800 text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-brand-900 text-accent-300 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
                 <c.icon className="size-5" />
               </div>
               <div className="min-w-0">
@@ -52,7 +52,7 @@ export default function ContactPage() {
       <section id="branches" className="container-x scroll-mt-32 py-20">
         <SectionHeading
           eyebrow="Our Branches"
-          title="Visit us in person"
+          title="Visit us *in person*"
           description="Walk in with your resume or hiring requirement — our team at either branch will be happy to help."
         />
         <div className="mt-14 grid gap-8 lg:grid-cols-2">
@@ -64,14 +64,14 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-20">
+      <section id={inlineEnquiryId} className="bg-paper py-20">
         <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.4fr]">
           <div>
             <SectionHeading
               center={false}
               eyebrow="Enquiry"
-              title="Send us a message"
-              description="Fill in your details and send them straight to our team on WhatsApp or email. We'll connect you with the nearest branch."
+              title="Send us a *message*"
+              description="Fill in your details and our team will receive your enquiry instantly — attach your resume if you're looking for a job. Prefer chat? Send it on WhatsApp instead."
             />
             <ul className="mt-8 space-y-4">
               {site.branches.map((b, i) => (

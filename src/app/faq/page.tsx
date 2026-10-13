@@ -8,7 +8,7 @@ import { faqGroups } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
-    "Answers to common questions about HireMatrix recruitment services, job placement, courses and training.",
+    "Answers to common questions about HireMatrix recruitment services for employers and job placement for job seekers.",
 };
 
 export default function FaqPage() {
@@ -16,8 +16,8 @@ export default function FaqPage() {
     <>
       <PageHero
         eyebrow="FAQs"
-        title="Frequently asked questions"
-        description="Everything you need to know about working with HireMatrix — as an employer, a job seeker or a learner."
+        title="Questions? *Answered.*"
+        description="Everything you need to know about working with HireMatrix — as an employer or a job seeker."
       />
 
       <section className="container-x grid gap-12 py-20 lg:grid-cols-[14rem_1fr]">
@@ -52,7 +52,7 @@ export default function FaqPage() {
       </section>
 
       <CtaBand
-        title="Still have questions?"
+        title="Still have *questions?*"
         text="Our team is happy to help. Call, WhatsApp or email us and we'll get back to you quickly."
       />
     </>

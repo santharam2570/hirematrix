@@ -14,8 +14,21 @@
   --color-brand-900: #142d3e;
   --color-brand-950: #0b1c28;
 
+  /* Warm saffron accent — pairs with the navy and sets HireMatrix apart from blue-only recruiters */
+  --color-accent-50: #fff8eb;
+  --color-accent-100: #feedc8;
+  --color-accent-200: #fdd98d;
+  --color-accent-300: #fbc152;
+  --color-accent-400: #f6a92a;
+  --color-accent-500: #e48c12;
+  --color-accent-600: #b9680b;
+  --color-accent-700: #8f4d0e;
+
+  --color-paper: #f8f5ef;
+
   --font-sans: var(--font-inter);
-  --font-display: var(--font-poppins);
+  --font-display: var(--font-jakarta);
+  --font-serif: var(--font-instrument);
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-slow: float 8s ease-in-out infinite;
@@ -113,7 +126,15 @@
   h2,
   h3,
   h4 {
-    @apply font-display text-brand-900;
+    @apply font-display tracking-tight text-brand-900;
+  }
+
+  /* Accent words in headings: written as *word* and rendered by <Accent> */
+  em.hl {
+    @apply font-serif font-normal tracking-normal italic;
+    font-size: 1.08em;
+    line-height: 1;
+    color: var(--hl, var(--color-accent-600));
   }
 }
 
@@ -129,6 +150,10 @@
   @apply btn bg-brand-800 text-white shadow-lg shadow-brand-800/20 hover:bg-brand-900;
 }
 
+@utility btn-accent {
+  @apply btn bg-accent-400 text-brand-950 shadow-lg shadow-accent-500/25 hover:bg-accent-300;
+}
+
 @utility btn-light {
   @apply btn bg-white text-brand-800 hover:bg-brand-50;
 }
@@ -142,7 +167,15 @@
 }
 
 @utility eyebrow {
-  @apply inline-flex items-center gap-2 rounded-full bg-brand-50 px-4 py-1.5 text-xs font-semibold tracking-widest text-brand-700 uppercase;
+  @apply inline-flex items-center gap-3 text-xs font-bold tracking-[0.2em] text-brand-600 uppercase before:h-0.5 before:w-8 before:rounded-full before:bg-accent-500;
+}
+
+@utility eyebrow-light {
+  @apply eyebrow text-accent-200 before:bg-accent-400;
+}
+
+@utility on-dark {
+  --hl: var(--color-accent-300);
 }
 
 @utility card {
@@ -162,4 +195,15 @@
     linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
     linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+@utility dot-matrix {
+  background-image: radial-gradient(circle, rgb(255 255 255 / 0.14) 1.2px, transparent 1.6px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at 70% 30%, black 20%, transparent 75%);
+}
+
+@utility dot-matrix-ink {
+  background-image: radial-gradient(circle, rgb(27 58 79 / 0.14) 1.2px, transparent 1.6px);
+  background-size: 22px 22px;
 }

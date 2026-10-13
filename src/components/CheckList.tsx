@@ -15,7 +15,7 @@ export default function CheckList({
       {items.map((t, i) => (
         <Reveal as="li" key={t} x={-20} y={0} delay={i * 0.08} className="flex items-start gap-3">
           <CircleCheck
-            className={`mt-0.5 size-5 shrink-0 ${light ? "text-brand-200" : "text-brand-600"}`}
+            className={`mt-0.5 size-5 shrink-0 ${light ? "text-accent-300" : "text-accent-500"}`}
           />
           <span className={light ? "text-brand-100" : ""}>{t}</span>
         </Reveal>

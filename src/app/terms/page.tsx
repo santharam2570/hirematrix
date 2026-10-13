@@ -23,13 +23,13 @@ export default function TermsPage() {
         {
           heading: "Our Services",
           body: [
-            "HireMatrix provides recruitment, staffing, HR outsourcing, career training and placement support services. Specific terms for employers and course participants — including fees, timelines and replacement policies — are set out in separate agreements or enrolment forms.",
+            "HireMatrix provides placement and recruitment services that connect job seekers with employment opportunities and help employers identify suitable candidates. Specific terms for employers and candidates — including service scope, fees and timelines — are set out in separate agreements.",
           ],
         },
         {
           heading: "No Guarantee of Employment",
           body: [
-            "While we make every effort to connect candidates with suitable opportunities, final hiring decisions rest solely with employers. Completion of a course or registration with HireMatrix does not guarantee employment.",
+            "While we make every effort to connect candidates with suitable opportunities, opportunities depend on active vacancies and employer eligibility criteria. Final shortlisting, selection, compensation and hiring decisions rest solely with employers. Registration with HireMatrix or placement assistance does not guarantee selection or a job offer.",
           ],
         },
         {
@@ -41,7 +41,7 @@ export default function TermsPage() {
         {
           heading: "Intellectual Property",
           body: [
-            "All content on this website, including text, graphics, logos and course material, is the property of HireMatrix and may not be copied or reproduced without written permission.",
+            "All content on this website, including text, graphics and logos, is the property of HireMatrix and may not be copied or reproduced without written permission.",
           ],
         },
         {
